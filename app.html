@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>線速貸 - 專業資金規劃服務</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft JhengHei', 'PingFang TC', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        /* 導航列 */
+        .navbar {
+            background: rgba(255, 255, 255, 0.801);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(255, 255, 255, 0.13);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #13c013bd;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 8px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: #757575;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-menu a:hover {
+            color: #11b911;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #228B22, #32CD32);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(34, 139, 34, 0.3);
+        }
+        
+        .nav-btn:hover {
+            background: linear-gradient(135deg, #006300, #228B22);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(11, 241, 11, 0.849);
+        }
+        
+        /* 主要橫幅 - 使用提供的台北夜景背景 */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
+                        url('https://images.pexels.com/photos/18179091/pexels-photo-18179091.jpeg') no-repeat center center;   
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            text-align: left;
+            color: rgb(255, 255, 255);
+            position: relative;
+        }
+
+        .hero-flex {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 30px;
+            height: 100%;
+            gap: 60px;
+        }
+
+        .hero-content {
+            max-width: 500px;
+            padding: 40px 30px;
+            background: rgba(143, 142, 142, 0.11);
+            border-radius: 20px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.2);
+            color: #fff;
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.3);
+            text-align: left;
+        }
+        
+        .hero-image {
+            flex: 1 1 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 350px;      /* 原本280px，調大 */
+            max-width: 600px;      /* 原本400px，調大 */
+            height: 480px;         /* 原本350px，調大 */
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+            background: #eee;
+        }
+        
+        .hero-title { 
+            font-size: 3.8rem;  
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #d17702;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0);
+        } 
+        
+        .hero-subtitle {
+            font-size: 1.6rem;
+            margin-bottom: 30px;    
+            color: #ff0000b9;
+            font-weight: 300;
+        }
+        
+        .hero-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            color: #fffdfd98;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* 新增：主橫幅按鈕樣式 */
+        .hero-line-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #00c24efd, #00a645c7);
+            color: white;
+            padding: 18px 45px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 40px rgba(0,200,81,0.4);
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        
+        .hero-line-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0,200,81,0.5);
+        }
+        
+        .hero-line-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            transition: all 0.5s ease;
+            transform: translate(-50%, -50%);
+        }
+        
+        .hero-line-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .hero-line-button span {
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* 服務特色區 */
+        .services {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f8f9fc, #e8f5e8);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            color: #249224;
+            margin-bottom: 20px;
+            position: relative;
+            font-weight: bold;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #0da5c0, #32CD32);
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #1d8004;
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .service-card {
+            background: rgb(255, 255, 255);
+            padding: 50px 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.377);
+            transition: all 0.3s ease;
+            border-top: 5px solid #228B22;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(34, 139, 34, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .service-card:hover::before {
+            left: 100%;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+        }
+        
+        .service-icon {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #0a9e0a, #32CD32);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+            box-shadow: 0 10px 25px rgba(9, 219, 9, 0.658);
+        }
+        
+        .service-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #000000;
+            font-weight: bold;
+        }
+        
+        .service-card p {
+            color: #575757;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        
+        /* 新增優勢區塊 - 改為白色背景提升可讀性 */
+        .new-advantages {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #ffffff, #ffffff);
+            color: #6d6d6d;    
+        }
+        
+        .new-advantages .section-title {
+            color: #0e6602;
+            font-size: 3rem;
+        }
+        
+        .new-advantages .section-title::after {
+            background: linear-gradient(90deg, #228b86, #32CD32);
+        }
+        
+        .new-advantages .section-subtitle {
+            color: hwb(0 26% 74%);
+        }
+            
+            .advantages-grid-new {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .advantage-card {
+            background: rgb(255, 255, 255);
+            backdrop-filter: blur(10px);
+            padding: 40px 30px;
+            border-radius: 15px;
+            border: 2px solid #e8f5e8;
+            box-shadow: 0 10px 30px rgb(59, 139, 34);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .advantage-card:hover {
+            background: #ffffff;
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(12, 196, 12, 0.712);
+            border-color: #228B22;
+        }
+        
+        .advantage-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #228B22;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .advantage-icon {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #228B22, #32CD32);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .advantage-card h4 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .advantage-card p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        
+        /* 原有優勢區塊 */
+        .advantages {
+            padding: 100px 0;
+            /* background: rgb(81, 201, 12); */
+             background: linear-gradient(135deg, #ffffff, #e8f5e8);
+        }
+        
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-top: 60px;
+        }
+        
+        .advantage-item {
+            text-align: center;
+            padding: 30px 20px;
+        }
+        
+        .advantage-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #228B22;
+            margin-bottom: 15px;
+        }
+        
+        .advantage-item h4 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .advantage-item p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* 客戶見證 */
+        .testimonials {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #ffffff, #e8f5e8);
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .testimonial {
+            background: rgb(255, 255, 255);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+        
+        .testimonial::before {
+            content: '"';
+            font-size: 4rem;
+            color: #228B22;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            line-height: 1;
+        }
+        
+        .testimonial-content {
+            margin-top: 30px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 30px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #b40000, #32CD32);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .author-info h5 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        /* 聯絡我們區塊 */
+        .contact {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #3d3d3dd7, #333);
+            color: rgb(255, 255, 255);
+            text-align: center;
+        }
+        
+        .contact .section-title {
+            color: white;
+        }
+        
+        .contact .section-title::after {
+            background: linear-gradient(90deg, #228B22, #32CD32);
+        }
+        
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contact-text {
+            font-size: 1.3rem;
+            margin-bottom: 50px;
+            line-height: 1.7;
+        }
+        
+        .line-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #00C851, #00a644);
+            color: rgb(221, 221, 221);
+            padding: 20px 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 40px rgba(0,200,81,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .line-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0,200,81,0.5);
+        }
+        
+        .line-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            transition: all 0.5s ease;
+            transform: translate(-50%, -50%);
+        }
+        
+        .line-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .line-button span {
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* 頁尾 */
+        .footer {
+            background: #1a1a1a;
+            color: #ccc;
+            padding: 50px 0 30px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            margin-bottom: 30px;
+        }
+        
+        .footer-links { 
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #9c9c9c;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #228B22;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 30px;
+            font-size: 0.9rem;
+        }
+        
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .services-grid,
+            .advantages-grid,
+            .advantages-grid-new,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 0 20px;
+            }
+        }
+        
+        /* 載入動畫 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- 導航列 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="https://cdn.discordapp.com/attachments/1389146200082485319/1401871106704670740/IMG_20250728_204350.jpg?ex=6893d3f5&is=68928275&hm=f877d7dfa73a92f34a139406238ed60b0e9d1f57bf9feac4703fb298c5f53311&" alt="線速貸 Logo">
+                線速貸
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#services">服務方案</a></li>
+                <li><a href="#advantages">申請條件</a></li>
+                <li><a href="#testimonials">服務內容</a></li>
+                <li><a href="#contact">客戶見證</a></li>
+            </ul>
+            <a href="#contact" class="nav-btn">預約諮詢</a>
+        </div>
+    </nav>
+
+    <!-- 主要橫幅 -->
+    <section class="hero">
+        <div class="hero-flex">
+            <div class="hero-content">
+                <h1 class="hero-title">開啟財富之門的第一步！</h1>
+                <p class="hero-subtitle">從今天起，與我們共築價值人生</p>
+                <div class="hero-description">
+                    線速貸以深厚的產業經驗與創新精神，陪伴客戶迎向每一個財務挑戰。無論是資產管理、資金整活運用，或是業務拓展，我們都致力於提供值得信賴的金融解決方案，協助您實現更宏觀願景。
+                </div>
+                <a href="https://line.me/ti/p/@946jqevb" class="hero-line-button">
+                    <span>💬點擊3分鐘解決你的資金需求！</span>
+                </a>
+            </div>
+            <div class="hero-image">
+                <!-- 請將下方 src 換成你要的圖片連結 -->
+                <img src="e7a855cd-1ee8-45ed-bc10-77df88662404.jpg" alt="主視覺圖片" />
+            </div>
+        </div>  
+    </section>
+
+    <!-- 新增優勢區塊 -->
+    <section class="new-advantages">
+        <div class="container">
+            <h2 class="section-title fade-in">我們的優勢</h2>
+            <p class="section-subtitle fade-in">六大核心優勢，為您提供最專業的金融服務</p>
+            
+            <div class="advantages-grid-new">
+                <div class="advantage-card fade-in">
+                    <div class="advantage-number">
+                        <span class="advantage-icon">👥</span>
+                        <span>1</span>
+                    </div>
+                    <h4>專業團隊一對一服務</h4>
+                    <p>讓您財務規劃無後顧之憂，專業顧問全程陪伴</p>
+                </div>
+                
+                <div class="advantage-card fade-in">
+                    <div class="advantage-number">
+                        <span class="advantage-icon">💻</span>
+                        <span>2</span>
+                    </div>
+                    <h4>全程線上顧問諮詢</h4>
+                    <p>流程透明又便利，隨時隨地都能獲得專業協助</p>
+                </div>
+                
+                <div class="advantage-card fade-in">
+                    <div class="advantage-number">
+                        <span class="advantage-icon">🚀</span>
+                        <span>3</span>
+                    </div>
+                    <h4>適用各類族群</h4>
+                    <p>無論自由工作者或創業者皆可申請，門檻彈性</p>
+                </div>
+                
+                <div class="advantage-card fade-in">
+                    <div class="advantage-number">
+                        <span class="advantage-icon">📅</span>
+                        <span>4</span>
+                    </div>
+                    <h4>彈性還款週期</h4>
+                    <p>自由選擇3～72期，量身打造最適合的還款計畫</p>
+                </div>
+                
+                <div class="advantage-card fade-in">
+                    <div class="advantage-number">
+                        <span class="advantage-icon">💎</span>
+                        <span>5</span>
+                    </div>
+                    <h4>提前清償不收違約金</h4>
+                    <p>降低負擔，讓您更靈活運用資金</p>
+                </div>
+                
+                <div class="advantage-card fade-in">
+                    <div class="advantage-number">
+                        <span class="advantage-icon">🔒</span>
+                        <span>6</span>
+                    </div>
+                    <h4>完整資料安全機制</h4>
+                    <p>守護客戶隱私，採用最高等級的資訊安全防護</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 服務特色 -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title fade-in">小額彈性信用貸款</h2>
+            <p class="section-subtitle fade-in">專業團隊為您量身打造最適合的資金解決方案</p>
+            
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon">💼</div>
+                    <h3>專業資金規劃</h3>
+                    <p>擁有豐富經驗的專業顧問團隊，深入了解您的財務狀況，為您制定最適合的資金運用策略，確保每一分資金都能發揮最大效益。</p>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <div class="service-icon">⚡</div>
+                    <h3>快速審核流程</h3>
+                    <p>簡化傳統冗長的申請程序，運用先進的評估系統，讓您在最短時間內獲得所需資金，把握每一個商機與發展機會。</p>
+                </div>
+                
+                <div class="service-card fade-in">
+                    <div class="service-icon">🛡️</div>
+                    <h3>彈性還款方案</h3>
+                    <p>根據您的收入狀況和還款能力，提供多元化的還款選擇，讓您在無負擔的情況下，輕鬆管理財務，專注事業發展。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 優勢展示 -->
+    <section id="advantages" class="advantages">
+        <div class="container">
+            <h2 class="section-title fade-in">為什麼選擇線速貸？</h2>
+            <p class="section-subtitle fade-in">專業服務與客戶信任是我們最大的優勢</p>
+            
+            <div class="advantages-grid">
+                <div class="advantage-item fade-in">
+                    <div class="advantage-number">5000+</div>
+                    <h4>服務客戶數</h4>
+                    <p>超過五千位客戶的信任選擇，累積豐富的服務經驗與專業口碑</p>
+                </div>
+                
+                <div class="advantage-item fade-in">
+                    <div class="advantage-number">24HR</div>
+                    <h4>快速回應</h4>
+                    <p>24小時內專業回覆，讓您的資金需求獲得即時且有效的解決方案</p>
+                </div>
+                
+                <div class="advantage-item fade-in">
+                    <div class="advantage-number">98%</div>
+                    <h4>客戶滿意度</h4>
+                    <p>高達98%的客戶滿意度，證明我們提供的服務品質與專業水準</p>
+                </div>
+                
+                <div class="advantage-item fade-in">
+                    <div class="advantage-number">10年</div>
+                    <h4>專業經驗</h4>
+                    <p>十年以上的金融服務經驗，深度了解市場動態與客戶需求</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 客戶見證 -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section-title fade-in">客戶真實見證</h2>
+            <p class="section-subtitle fade-in">聽聽我們客戶的親身體驗與成功故事</p>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial fade-in">
+                    <div class="testimonial-content">
+                        在創業初期最需要資金周轉時，線速貸提供了及時的協助。專業的服務團隊不僅快速處理我的申請，更給予我很多實用的財務建議，讓我的事業得以順利發展。
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">陳</div>
+                        <div class="author-info">
+                            <h5>陳先生</h5>
+                            <p>電商業者</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial fade-in">
+                    <div class="testimonial-content">
+                        家裡突然需要一筆資金處理緊急狀況，透過朋友介紹找到線速貸。整個申請過程非常透明，沒有任何隱藏費用，而且還款方案很有彈性，減輕了我很大的壓力。
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">李</div>
+                        <div class="author-info">
+                            <h5>李小姐</h5>
+                            <p>上班族</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial fade-in">
+                    <div class="testimonial-content">
+                        作為小企業主，資金調度一直是我最頭痛的問題。線速貸的專業顧問詳細分析我的營運狀況，提供了最適合的資金解決方案，讓我能專心拓展業務。
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">王</div>
+                        <div class="author-info">
+                            <h5>王經理</h5>
+                            <p>餐飲業</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 聯絡我們 -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content fade-in">
+                <h2 class="section-title">立即開始您的財務規劃</h2>
+                <p class="contact-text">
+                    專業顧問團隊隨時為您服務，提供一對一諮詢<br>
+                    讓我們協助您找到最適合的資金解決方案
+                </p>
+                <a href="https://line.me/ti/p/@946jqevb" class="line-button">
+                    <span>💬點擊3分鐘解決你的資金需求！</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 頁尾 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="#">服務條款</a>
+                    <a href="#">隱私政策</a>
+                    <a href="#">常見問題</a>
+                    <a href="#">聯絡我們</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 線速貸 版權所有 | 服務時間：週一至週五 09:00-18:00</p>
+                <p>本網站僅提供資訊參考，實際服務條件以現場評估為準</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 滾動動畫效果
+        function fadeInOnScroll() {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', fadeInOnScroll);
+        window.addEventListener('load', fadeInOnScroll);
+        
+        // 平滑滾動（如果你還想要這個功能，可以保留，否則也可刪除）
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 其餘動畫效果全部移除
+    </script>
+</body>
+</html>
